@@ -1,4 +1,5 @@
 import React from 'react';
+import InputMask from 'react-input-mask';
 import PropTypes from 'prop-types';
 import { forbidExtraProps, nonNegativeInteger } from 'airbnb-prop-types';
 import { withStyles, withStylesPropTypes } from 'react-with-styles';
@@ -252,32 +253,34 @@ class DateInput extends React.PureComponent {
           withFang && openDirection === OPEN_UP && styles.DateInput__openUp,
         )}
       >
-        <input
-          {...css(
-            styles.DateInput_input,
-            small && styles.DateInput_input__small,
-            regular && styles.DateInput_input__regular,
-            readOnly && styles.DateInput_input__readOnly,
-            focused && styles.DateInput_input__focused,
-            disabled && styles.DateInput_input__disabled,
-            value && 'not_empty_input',
-          )}
-          aria-label={ariaLabel === undefined ? placeholder : ariaLabel}
-          type="text"
-          id={id}
-          name={id}
-          ref={this.setInputRef}
-          value={value}
-          onChange={this.onChange}
-          onKeyDown={this.onKeyDown}
-          onFocus={onFocus}
-          placeholder={placeholder}
-          autoComplete="off"
-          disabled={disabled}
-          readOnly={typeof readOnly === 'boolean' ? readOnly : isTouch}
-          required={required}
-          aria-describedby={screenReaderMessage && screenReaderMessageId}
-        />
+        <InputMask mask="99/99/9999">
+          <input
+            {...css(
+              styles.DateInput_input,
+              small && styles.DateInput_input__small,
+              regular && styles.DateInput_input__regular,
+              readOnly && styles.DateInput_input__readOnly,
+              focused && styles.DateInput_input__focused,
+              disabled && styles.DateInput_input__disabled,
+              value && 'not_empty_input',
+            )}
+            aria-label={ariaLabel === undefined ? placeholder : ariaLabel}
+            type="text"
+            id={id}
+            name={id}
+            ref={this.setInputRef}
+            value={value}
+            onChange={this.onChange}
+            onKeyDown={this.onKeyDown}
+            onFocus={onFocus}
+            placeholder={placeholder}
+            autoComplete="off"
+            disabled={disabled}
+            readOnly={typeof readOnly === 'boolean' ? readOnly : isTouch}
+            required={required}
+            aria-describedby={screenReaderMessage && screenReaderMessageId}
+          />
+        </InputMask>
 
         {withFang && (
           <svg
