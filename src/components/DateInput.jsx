@@ -241,6 +241,12 @@ class DateInput extends React.PureComponent {
 
     const inputHeight = getInputHeight(reactDates, small);
 
+    const formatChars = {
+      9: '[1-12]',
+      a: '[1-31]',
+      '*': '[1900-2200]',
+    };
+
     return (
       <div
         {...css(
@@ -254,7 +260,8 @@ class DateInput extends React.PureComponent {
         )}
       >
         <InputMask
-          mask="12/31/9999"
+          mask="99/aa/****"
+          formatChars={formatChars}
           onChange={this.onChange}
           onFocus={onFocus}
           value={value}
