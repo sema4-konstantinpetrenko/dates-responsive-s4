@@ -254,7 +254,7 @@ class DateInput extends React.PureComponent {
         )}
       >
         <InputMask
-          mask="99/99/9999"
+          mask="12/31/9999"
           onChange={this.onChange}
           onFocus={onFocus}
           value={value}
