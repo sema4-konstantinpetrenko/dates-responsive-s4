@@ -268,6 +268,7 @@ class DateInput extends React.PureComponent {
           formatChars={formatChars}
           onChange={this.onChange}
           onFocus={onFocus}
+          onKeyDown={this.onKeyDown}
           value={value}
           disabled={disabled}
           readOnly={typeof readOnly === 'boolean' ? readOnly : isTouch}
@@ -289,7 +290,6 @@ class DateInput extends React.PureComponent {
               id={id}
               name={id}
               ref={this.setInputRef}
-              onKeyDown={this.onKeyDown}
               placeholder={placeholder}
               autoComplete="off"
               required={required}
