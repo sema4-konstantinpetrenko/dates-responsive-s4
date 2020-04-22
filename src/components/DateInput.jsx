@@ -138,7 +138,8 @@ class DateInput extends React.PureComponent {
 
   onChange(e) {
     const { onChange, onKeyDownQuestionMark } = this.props;
-    const dateString = e.target.value;
+    let dateString = e.target.value;
+    dateString = dateString.replace(/_/g, '');
 
     if (dateString.length > 10) {
       e.stopPropagation();
@@ -242,9 +243,12 @@ class DateInput extends React.PureComponent {
     const inputHeight = getInputHeight(reactDates, small);
 
     const formatChars = {
-      9: '[1-12]',
-      a: '[1-31]',
-      '*': '[1900-2200]',
+      9: '[0-9]',
+      1: '[0-1]', // M
+      2: '[1-2]', // Y: 1900, 2000
+      3: '[0-3]', // D
+      a: '[A-Za-z]',
+      '*': '[A-Za-z0-9]',
     };
 
     return (
@@ -260,7 +264,7 @@ class DateInput extends React.PureComponent {
         )}
       >
         <InputMask
-          mask="99/aa/****"
+          mask="19/39/2999"
           formatChars={formatChars}
           onChange={this.onChange}
           onFocus={onFocus}
