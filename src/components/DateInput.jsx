@@ -7,15 +7,13 @@ import throttle from 'lodash/throttle';
 import isTouchDevice from 'is-touch-device';
 
 import {
-  KEY_BACKSPACE, KEY_DELETE,
   OPEN_DOWN,
   OPEN_UP,
   FANG_HEIGHT_PX,
   FANG_WIDTH_PX,
   DEFAULT_VERTICAL_SPACING,
   MODIFIER_KEY_NAMES,
-  KEY_ARROW_LEFT,
-  KEY_ARROW_RIGHT,
+  KEY_TAB,
 } from '../constants';
 import noflip from '../utils/noflip';
 import getInputHeight from '../utils/getInputHeight';
@@ -138,8 +136,7 @@ class DateInput extends React.PureComponent {
 
   onChange(e) {
     const { onChange, onKeyDownQuestionMark } = this.props;
-    let dateString = e.target.value;
-    dateString = dateString.replace(/_/g, '');
+    const dateString = e.target.value;
 
     if (dateString.length > 10) {
       e.stopPropagation();
@@ -158,26 +155,13 @@ class DateInput extends React.PureComponent {
   }
 
   onKeyDown(e) {
-    const { displayValue } = this.props;
-
-    const allowedSymbolsRegex = new RegExp('^[0-9/]$');
-    const allowedSpecialKeys = [KEY_BACKSPACE, KEY_DELETE, KEY_ARROW_RIGHT, KEY_ARROW_LEFT];
-    const isKeyAllowed = allowedSymbolsRegex.test(e.key);
-    const isSpecialKeyAllowed = allowedSpecialKeys.includes(e.keyCode);
-
-    e.stopPropagation();
-
-    if (isKeyAllowed === false && isSpecialKeyAllowed === false) {
+    if (e.keyCode === KEY_TAB) {
       e.preventDefault();
       return false;
     }
 
     if (!MODIFIER_KEY_NAMES.has(e.key)) {
       this.throttledKeyDown(e);
-    }
-
-    if (displayValue) {
-      this.setState({ forceChange: true });
     }
   }
 
